@@ -8,6 +8,12 @@
   <link rel="stylesheet" type="text/css" href="<%= style %>">
   <% }) %>
 
+  <% with (scripts) { %>
+  <% [].concat(jasmine, vendor, helpers).forEach(function(script){ %>
+  <script src="<%= script %>"></script>
+  <% }) %>
+  <% }; %>
+
   <script src="<%= temp %>/require.js"></script>
   <script>
     require.onError = function(error) {
@@ -21,12 +27,6 @@
       throw Error(message);
     };
   </script>
-
-  <% with (scripts) { %>
-  <% [].concat(jasmine, vendor, helpers).forEach(function(script){ %>
-  <script src="<%= script %>"></script>
-  <% }) %>
-  <% }; %>
 
   <script>
     <% if (options.mainRequireConfig) { %>
